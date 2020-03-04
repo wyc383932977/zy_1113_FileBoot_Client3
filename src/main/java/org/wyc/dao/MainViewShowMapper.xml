@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<!-- 类似接口的实现类 -->
+<mapper namespace="org.wyc.dao.MainViewShowMapper">
+	<!-- 根据ID查询用户信息 -->
+	<select id="getAdminUserById" resultMap="adminUserResultMap">
+		SELECT * FROM T_ADMIN_USER WHERE AU_ID=#{id}
+	</select>
+	
+	<select id="getMenuList" resultMap="getMenuListResultMap">
+		SELECT M.M_ID,M.M_NAME,M.M_FID,M.M_URL FROM T_MENU M 
+		INNER JOIN T_ROLE_MENU RM ON M.M_ID=RM.M_ID 
+		INNER JOIN T_ADMIN_USER_ROLE AUR ON AUR.R_ID=RM.R_ID 
+		INNER JOIN T_DICT D ON D.D_CODE=M.M_STATE AND D_TYPE='STATE' 
+		WHERE AUR.SPACE2=#{id}
+	</select>
+	
+	<resultMap type="org.wyc.model.AdminUser" id="adminUserResultMap">
+		<result property="id" column="AU_ID" />
+		<result property="account" column="AU_ACCOUNT" />
+		<result property="password" column="AU_PASSWORD" />
+		<result property="name" column="AU_NAME" />
+	</resultMap>
+	
+	<resultMap type="org.wyc.model.Menu" id="getMenuListResultMap">
+		<result property="id" column="M_ID" />
+		<result property="name" column="M_NAME" />
+		<result property="fid" column="M_FID" />
+		<result property="url" column="M_URL" />
+	</resultMap>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.wyc.dao.ScoreLogMapper">
+	<select id="getScoreLogList" resultMap="scoreLogResultMap">
+		SELECT U.U_NAME,SL_SCORE,SL_INCIDENT,SL_CTIME FROM T_SCORE_LOG SL
+		INNER JOIN T_USER U ON U.U_ID=SL.U_ID
+		WHERE U.U_ID=#{userId} ORDER BY SL_CTIME DESC
+	</select>
+
+	<resultMap type="org.wyc.model.ScoreLog" id="scoreLogResultMap">
+		<result property="id" column="SL_ID" />
+		<result property="userId" column="U_ID" />
+		<result property="score" column="SL_SCORE" />
+		<result property="incident" column="SL_INCIDENT" />
+		<result property="fileId" column="F_ID" />
+		<result property="createTime" column="SL_CTIME" javaType="java.sql.Timestamp" />
+		<result property="updateTime" column="SL_UTIME" javaType="java.sql.Timestamp" />
+		<result property="userName" column="U_NAME" />
+	</resultMap>
+	
+</mapper>

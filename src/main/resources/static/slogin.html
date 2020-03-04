@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <!-- 为了保证IE能够使用最新渲染模式而不是兼容模式 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文档管理系统</title>
+  <!-- zui -->
+  <link href="3rd/zui/css/zui.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+  <div class="main">
+    <div class="panel panel-primary login">
+      <div class="panel-heading title">
+        文档管理系统登录
+      </div>
+      <div class="panel-body" style="padding-left: 50px;">
+        <div class="input-control has-icon-left">
+          <input id="userAccount" type="text" class="form-control" placeholder="用户名" name="account">
+          <label for="userAccount" class="input-control-icon-left"><i class="icon icon-user "></i></label>
+        </div>
+        <div class="input-control has-icon-left">
+          <input id="userpswd" type="password" class="form-control" placeholder="密码" name="password">
+          <label for="userpswd" class="input-control-icon-left"><i class="icon icon-key"></i></label>
+        </div>
+        <div>
+          <img src="verifyCode.ajax" class="img1" id="verifyCode" onclick="myRefersh();">
+        </div>
+        <div class="input-control has-icon-left">
+          <input id="qverifyCode" type="text" class="form-control" placeholder="验证码" name="qverifyCode">
+          <label for="qverifyCode" class="input-control-icon-left"><i class="icon icon-paper-clip "></i></label>
+        </div>
+
+        <div style="text-align: center;margin-top: 40px;">
+          <button class="btn btn-primary" style="margin-right: 20px;" type="button" onclick="login();"><i
+              class="icon icon-location-arrow"></i>登录</button>
+          <button class="btn btn-primary" type="button" onclick="registerViewShow();"><i
+              class="icon icon-plus"></i>注册</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="3rd/jquery.js"></script>
+<script src="js/zui.min.js"></script>
+<script src="js/login.js"></script>
+
+</html>

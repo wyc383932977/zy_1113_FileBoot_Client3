@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="3rd/zui/css/zui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body onload="first();">
+    <!-- ajax监听 弹框绑定测试1 显示自己的弹框 -->
+    <button type="button" onclick="test()">测试</button>
+    <!-- 显示上面按钮绑定后的弹框 -->
+    <button type="button" id="triggerButton" onclick="">测试1</button>
+    <button type="button" onclick="test4();">侧是是是</button>
+
+    <!-- 显示页面元素的内容 -->
+    <button type="button" onclick="test2()">测试2</button>
+    <div id="myModalAlert" class="alert alert-success with-icon">
+        <i class="icon-ok"></i>
+        <div class="content">我希望能够在对话框看到此消息。</div>
+    </div>
+    <!--  -->
+    <button type="button" onclick="test3()">测试3</button>
+
+    <button type="button" class="btn btn-primary" data-custom="#myModalAlert" data-toggle="modal">指定页面元素的内容</button>
+    <!-- 使用data-iframe属性 -->
+    <button type="button" class="btn btn-primary" data-iframe="partial/iframe-modal.html"
+        data-toggle="modal">iframe对话框</button>
+
+    <!-- 使用data-type 和data-url属性 -->
+    <button type="button" class="btn btn-primary" data-type="iframe" data-url="slogin.html"
+        data-toggle="modal">iframe对话框</button>
+
+    <ul class="pager" data-ride="pager" data-page="2" data-rec-total="89"></ul>
+
+
+    <!-- 对话框HTML -->
+    <div class="modal fade" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                                class="sr-only">关闭</span></button>
+                        <h4 class="modal-title">对话框标题</h4>
+                    </div>
+                    <div class="modal-body" style="max-height: initial; overflow: visible;">
+                        <h4>虞美人·春花秋月何时了 <small>五代·李煜</small></h4>
+                        <p>春花秋月何时了？往事知多少。小楼昨夜又东风，故国不堪回首月明中。<br>雕栏玉砌应犹在，只是朱颜改。问君能有几多愁？恰似一江春水向东流</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 对话框触发按钮 -->
+    <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">启动对话框</button>
+    <button type="button" onclick="test3();">监听</button>
+
+    <!-- 对话框HTML -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">关闭</span></button>
+                    <h4 class="modal-title">标题</h4>
+                </div>
+                <div class="modal-body">
+                    <p>主题内容...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="3rd/jquery.js"></script>
+<script src="js/zui.min.js"></script>
+<script type="text/javascript">
+    function test() {
+        /* 使用Javascript方法绑定在按钮上触发 */  
+        $('#triggerButton').modalTrigger({ custom: '<h1>此内容是自定义的</h1><p>哈哈:)</p>' });
+
+        /* 使用触发器对象直接显示 */
+        (new $.zui.ModalTrigger({ custom: '自定义内容', title: '新的标题', icon: 'heart' })).show();
+    }
+    function test2() {
+        /* 使用触发器对象直接显示 */
+        (new $.zui.ModalTrigger({ custom: '#myModalAlert' })).show();
+        
+    }
+    function test3() {
+        $('#myModal').modal('show', 'fit');
+        $('#triggerModal').on('shown.zui.modal', function() {
+            alert("gogo");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+        });
+    }
+    function test4() {
+        $('#triggerButton').modalTrigger('show', 'fit');
+    }
+
+    function first() {
+        $('#myPager').on('onPageChange', function (e, state, oldState) {
+            if (state.page !== oldState.page) {
+                console.log('页码从', oldState.page, '变更为', state.page);
+            }
+        });
+        $('#myModal').on('shown.zui.modal', function () {
+            alert('lohss');
+        })
+    }
+</script>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../3rd/zui/css/zui.min.css" rel="stylesheet">
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 1536px;
+            height: 754px;
+            background-image: url(../img/authbackground.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            padding-top: 10%;
+        }
+
+        .register {
+            background-color: #fff;
+            min-height: 453px;
+            width: 520px;
+            margin: 0 auto;
+            max-width: inherit;
+            padding-top: 2%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="panel panel-primary register">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="exampleInputAccount4" class="col-sm-2">账号</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="text" class="form-control" id="exampleInputAccount4" placeholder="电子邮件/手机号/用户名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4" class="col-sm-2">密码</label>
+                    <div class="col-md-6 col-sm-10">
+                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputAddress1" class="col-sm-2">地址</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="exampleInputAddress1">
+                            <option>北京</option>
+                            <option>上海</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="exampleInputAddress2" placeholder="市/县">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="exampleInputAddress3" placeholder="详细地址">
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 记住我
+                            </label>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">返回</button>
+                    </div>
+                </div> -->
+            </form>
+        </div>
+    </div>
+
+</body>
+<script src="../3rd/jquery.js"></script>
+<script src="../js/zui.min.js"></script>
+
+</html>

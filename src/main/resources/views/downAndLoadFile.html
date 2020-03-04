@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上传文件</title>
+    <link href="../3rd/zui/css/zui.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/FileManage.css">
+</head>
+
+<body>
+    <div>
+        <form id="firstForm" method="post" enctype="multipart/form-data">
+            <input type="file" name="oneFile" class="upLoadFile">
+            <br>
+            <div style="width: 100px;margin-left: 50%;">
+                <input id="inputAccountExample1" type="text" class="form-control" placeholder="设置积分" name="fileScore"
+                    value="${fileName!}">
+                <label for="inputAccountExample1" class="input-control-icon-left"></label>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="button" onclick="onloadFile();" style="margin-left: 60%;">提交</button>
+        </form>
+        <!-- 表格 -->
+        <div style="margin-top: 60px;margin-left: 100px;">
+            <table border="1" class="u10">
+                <tr>
+                    <!-- "th"表示表头 -->
+                    <th>序号</th>
+                    <th>文件名</th>
+                    <th>状态</th>
+                    <th>上传时间</th>
+                </tr>
+                [#list list as file]
+                <!-- 若未指定作用域,则所用作用域都找一遍 -->
+                <tr>
+                    <td>${file_index+1}</td>
+                    <td>${file.name }</td>
+                    <td>${file.space1 }</td>
+                    <td>${file.date }</td>
+                </tr>
+                [/#list]
+            </table>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function onloadFile() {
+        var formData = new FormData($('#firstForm')[0]);
+        $.ajax({
+            type: 'post',
+            url: "uploadFile.ajax",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: "json"
+        }).success(function (data) {
+            if (data.msg == "succeed") {
+                var t = new $.zui.ModalTrigger({ custom: '上传成功', title: '上传状态', icon: 'heart' });
+                t.show();
+            } else {
+                (new $.zui.ModalTrigger({ custom: '上传失败' })).show();
+            }
+        }).error(function () {
+            (new $.zui.ModalTrigger({ custom: '上传失败' })).show();
+        });
+    }
+
+</script>
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script src="../js/zui.min.js"></script>
+
+</html>

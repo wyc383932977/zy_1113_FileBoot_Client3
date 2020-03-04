@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>我的文件</title>
+        <link href="3rd/zui/css/zui.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/FileManage.css">
+    </head>
+    
+    <body>
+        <!-- 表格 -->
+        <div style="margin-top: 60px;margin-left: 100px;">
+            <table border="1" class="u10">
+                <tr>
+                    <!-- "th"表示表头 -->
+                    <th>序号</th>
+                    <th>客户</th>
+                    <th>事件</th>
+                    <th>分值</th>
+                    <th>时间</th>
+                </tr>
+                [#list list as scoreLog]
+                <!-- 若未指定作用域,则所用作用域都找一遍 -->
+                <tr>
+                    <td>${scoreLog_index+1}</td>
+                    <td>${scoreLog.userName }</td>
+                    <td>${scoreLog.incident }</td>
+                    <td>${scoreLog.score }</td>
+                    <td>${scoreLog.createTime }</td>
+                </tr>
+                [/#list]
+            </table>
+        </div>
+    </body>
+    <script src="3rd/jquery.js"></script>
+    <script src="js/zui.min.js"></script>
+
+</html>

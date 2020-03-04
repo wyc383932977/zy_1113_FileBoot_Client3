@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.wyc.dao.DownAndLoadMapper">
+	<select id="getFileList" resultMap="fileResultMap">
+		SELECT U.U_NAME,U.U_ID,F.F_ID,F.F_NAME,F.F_DATE,D.D_VALUE FROM T_FILE F 
+		INNER JOIN T_DICT D ON F.F_STATE=D.D_CODE AND D.D_TYPE='FILESTATE' 
+		INNER JOIN T_USER U ON U.U_ID=F.U_ID
+		WHERE F.U_ID=#{id} AND F.F_STATE=2 ORDER BY F.F_DATE DESC
+	</select>
+
+	<insert id="loadFile" parameterType="org.wyc.model.File">
+		<selectKey order="BEFORE" resultType="java.lang.Integer" keyProperty="id">
+			SELECT SEQ_T_FILE.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO T_FILE (F_ID,U_ID,F_NAME,F_URL,F_STATE,F_DATE,F_SCORE) VALUES
+		(#{id},#{userId},#{name},#{url,jdbcType=VARCHAR},#{state},#{date},#{fileScore})
+	</insert>
+
+	<insert id="loadFileLog" parameterType="org.wyc.model.Log">
+		INSERT INTO T_LOG (L_ID,AU_ID,L_INCIDENT,L_TIME) VALUES
+		(SEQ_T_LOG.NEXTVAL,#{userId},#{incident},#{createTime})
+	</insert>
+
+	<!-- 根据ID查询用户信息 -->
+	<select id="getUserInfoById" resultMap="userResultMap">
+		SELECT * FROM T_USER WHERE U_ID=#{id}
+	</select>
+	
+	<resultMap type="org.wyc.model.ClientUser" id="userResultMap">
+		<result property="id" column="U_ID" />
+		<result property="account" column="U_ACCOUNT" />
+		<result property="name" column="U_NAME" />
+		<result property="password" column="U_PASSWORD" />
+		<result property="stateStr" column="STATE" />
+		<result property="score" column="U_SCORE" />
+		<result property="createTime" column="U_CTIME" javaType="java.sql.Timestamp" />
+		<result property="state" column="U_STATE" />
+	</resultMap>
+
+	<resultMap type="org.wyc.model.File" id="fileResultMap">
+		<result property="id" column="F_ID" />
+		<result property="userId" column="U_ID" />
+		<result property="name" column="F_NAME" />
+		<result property="url" column="F_URL" />
+		<result property="state" column="F_STATE" />
+		<result property="date" column="F_DATE"  javaType="java.sql.Timestamp"/>
+		<result property="space1" column="D_VALUE" />
+		<result property="space2" column="U_ID" />
+		<result property="space3" column="U_NAME" />
+	</resultMap>
+
+
+</mapper>

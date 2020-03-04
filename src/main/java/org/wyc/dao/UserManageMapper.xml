@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.wyc.dao.UserManageMapper">
+	<!-- 获取用户列表 -->
+	<select id="getUserList" resultMap="getUserListResultMap">
+		SELECT U_ID,U_ACCOUNT,U_NAME,U_PASSWORD,D_VALUE AS STATE,U_SCORE,U_CTIME FROM T_USER U
+		INNER JOIN T_DICT D ON D.D_CODE=U.U_STATE AND D_TYPE='STATE'
+		<where>
+			<if test="account !=null and account!=''">
+				AND U_ACCOUNT LIKE CONCAT(CONCAT('%',#{account,jdbcType=VARCHAR}),'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 获取列表信息总条数 -->
+	<select id="getCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM T_USER
+		<where>
+			<if test="account !=null and account!=''">
+				AND U_ACCOUNT LIKE CONCAT(CONCAT('%',#{account,jdbcType=VARCHAR}),'%')
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据id查询客户信息 -->
+	<select id="getClientUserById" resultMap="getUserListResultMap">
+		SELECT * FROM T_USER WHERE U_ID=#{id,jdbcType=NUMERIC}
+	</select>
+
+	<!-- 根据ID查询用户信息 -->
+	<select id="getUserById" resultMap="adminUserResultMap">
+		SELECT * FROM T_ADMIN_USER WHERE AU_ID=#{id,jdbcType=NUMERIC}
+	</select>
+	<!-- 根据id修改客户状态 -->
+	<update id="changeUserState">
+		UPDATE T_USER SET U_STATE=#{state,jdbcType=NUMERIC} WHERE U_ID=#{id,jdbcType=NUMERIC}
+	</update>
+
+	<resultMap type="org.wyc.model.ClientUser" id="getUserListResultMap">
+		<result property="id" column="U_ID" />
+		<result property="account" column="U_ACCOUNT" />
+		<result property="name" column="U_NAME" />
+		<result property="password" column="U_PASSWORD" />
+		<result property="stateStr" column="STATE" />
+		<result property="score" column="U_SCORE" />
+		<result property="createTime" column="U_CTIME" javaType="java.sql.Timestamp" />
+		<result property="state" column="U_STATE" />
+	</resultMap>
+
+	<resultMap type="org.wyc.model.AdminUser" id="adminUserResultMap">
+		<result property="id" column="AU_ID" />
+		<result property="account" column="AU_ACCOUNT" />
+		<result property="password" column="AU_PASSWORD" />
+		<result property="name" column="AU_NAME" />
+		<result property="state" column="AU_STATE" />
+		<result property="createTime" column="AU_CTIME" />
+	</resultMap>
+</mapper>

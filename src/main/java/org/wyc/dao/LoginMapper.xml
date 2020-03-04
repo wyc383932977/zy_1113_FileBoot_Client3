@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 类似接口的实现类 -->
+<mapper namespace="org.wyc.dao.LoginMapper">
+	<!-- 注册客户 --><!-- id为方法名 ,parameterType为传参model #{model里的属性名}→获取model的值 -->
+	<insert id="register" parameterType="org.wyc.model.ClientUser">
+		<selectKey order="BEFORE" resultType="java.lang.Integer" keyProperty="id">
+			SELECT SEQ_T_USER.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO T_USER (U_ID,U_ACCOUNT,U_PASSWORD,U_NAME,U_STATE,U_CTIME) VALUES
+		(#{id},#{account},#{password},#{name},#{state},#{createTime})
+	</insert>
+
+	<!-- 判断用户是否被禁用 -->
+	<select id="judgeUserisBan" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM T_USER WHERE U_ACCOUNT=#{account} AND U_STATE=1
+	</select>
+
+	<!-- 登录 -->
+	<select id="login" resultMap="clientUserResultMap">
+		SELECT * FROM T_USER WHERE U_ACCOUNT=#{account} AND U_PASSWORD=#{password} AND U_STATE=1
+	</select>
+	
+	<!-- 注册日志 -->
+	<insert id="registerLog" parameterType="org.wyc.model.Log">
+		INSERT INTO T_LOG (L_ID,AU_ID,L_INCIDENT,L_TIME) VALUES (SEQ_T_LOG.NEXTVAL,#{userId},#{incident},#{createTime})
+	</insert>
+
+	<resultMap type="org.wyc.model.ClientUser" id="clientUserResultMap">
+		<result property="id" column="U_ID" />
+		<result property="account" column="U_ACCOUNT" />
+		<result property="password" column="U_PASSWORD" />
+		<result property="name" column="U_NAME" />
+		<result property="state" column="U_STATE" />
+		<result property="createTime" column="U_CTIME" />
+	</resultMap>
+</mapper>
