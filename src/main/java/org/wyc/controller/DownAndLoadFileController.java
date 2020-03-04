@@ -27,7 +27,7 @@ public class DownAndLoadFileController {
 
 	@RequestMapping("downAndLoadFileShow.html")
 	public ModelAndView downAndLoadFileShow(HttpServletRequest req, HttpServletResponse resp) {
-
+		System.out.println("sss");
 		ModelAndView mv = new ModelAndView();
 		HttpSession session=req.getSession();
 		Integer userId=(Integer)session.getAttribute("uId");
